@@ -7,15 +7,8 @@ class Solution {
                 sb += s.charAt(i);
             }
         }
-        int l = 0;
-        int r = sb.length()-1;
-        while(l < r){
-            if(sb.charAt(l)!=sb.charAt(r)){
-                return false;
-            }
-            l++;
-            r--;
-        }
-        return true;
+        StringBuilder ans = new StringBuilder(sb);
+        ans.reverse();
+        return sb.equals(ans.toString());
     }
 }
