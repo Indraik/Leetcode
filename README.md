@@ -17,4 +17,8 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0141-linked-list-cycle](https://github.com/Indraik/Leetcode/tree/master/0141-linked-list-cycle) |
+## Database
+|  |
+| ------- |
+| [1978-employees-whose-manager-left-the-company](https://github.com/Indraik/Leetcode/tree/master/1978-employees-whose-manager-left-the-company) |
 <!---LeetCode Topics End-->
