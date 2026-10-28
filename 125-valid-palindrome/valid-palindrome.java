@@ -9,6 +9,7 @@ class Solution {
         }
         StringBuilder ans = new StringBuilder(sb);
         ans.reverse();
+        
         return sb.equals(ans.toString());
     }
 }
