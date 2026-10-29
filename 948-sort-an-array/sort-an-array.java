@@ -1,46 +1,59 @@
 class Solution {
     public int[] sortArray(int[] nums) {
-        quickSort(nums, 0, nums.length - 1);
+        if (nums.length <= 1) {
+            return nums;
+        }
+
+        int[] temp = new int[nums.length];
+        mergeSort(nums, temp, 0, nums.length - 1);
+
         return nums;
     }
 
-    public void quickSort(int[] nums, int low, int high) {
+    public void mergeSort(int[] nums, int[] temp, int low, int high) {
         if (low >= high) {
             return;
         }
 
-        int[] pivotBounds = partition(nums, low, high);
+        int mid = low + (high - low) / 2;
 
-        quickSort(nums, low, pivotBounds[0] - 1);
-        quickSort(nums, pivotBounds[1] + 1, high);
+        // Sort the left half
+        mergeSort(nums, temp, low, mid);
+
+        // Sort the right half
+        mergeSort(nums, temp, mid + 1, high);
+
+        // Merge both sorted halves
+        merge(nums, temp, low, mid, high);
     }
 
-    public int[] partition(int[] nums, int low, int high) {
-        int pivot = nums[high];
-
-        int lt = low;
+    public void merge(int[] nums, int[] temp, int low, int mid, int high) {
         int i = low;
-        int gt = high;
+        int j = mid + 1;
+        int k = low;
 
-        while (i <= gt) {
-            if (nums[i] < pivot) {
-                swap(nums, lt, i);
-                lt++;
-                i++;
-            } else if (nums[i] > pivot) {
-                swap(nums, i, gt);
-                gt--;
+        // Compare elements from both halves
+        while (i <= mid && j <= high) {
+            if (nums[i] <= nums[j]) {
+                temp[k++] = nums[i++];
             } else {
-                i++;
+                temp[k++] = nums[j++];
             }
         }
 
-        return new int[]{lt, gt};
-    }
+        // Copy remaining elements from the left half
+        while (i <= mid) {
+            temp[k++] = nums[i++];
+        }
 
-    public void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
+        // Copy remaining elements from the right half
+        while (j <= high) {
+            temp[k++] = nums[j++];
+        }
+
+        // Copy the merged elements back into the original array
+        for (int p = low; p <= high; p++) {
+            nums[p] = temp[p];
+        }
     }
 }
